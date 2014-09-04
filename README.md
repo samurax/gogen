@@ -1,7 +1,8 @@
 gogen
 =====
 
-A very easy to use golang precompiler that generate generic types  based on templates. Golang with generics.
+ A very easy to use golang precompiler that generate generic types  based on templates. 
+Golang with generics.
 
 
 Overview:
@@ -74,8 +75,9 @@ To write the template code , you only need to know two keywords  <data> and <onc
           
 <data>  Will be replaced by your data type defined in your code.
 <once>
-	//the definitions writen inside this blocks will be expanded by gogen only one time for all types
-        //that use this template. here is where you place your types definitions an your helper functions                 //and data used by all the object thats are implemented in this template. Is optional. 
+	   //the definitions writen inside this blocks will be expanded by gogen only one time 
+	   // for all types that use this template. here is where you place your types definitions
+	   // and commons functions for the template 
 </once>
             
 file stack.ge:
@@ -85,8 +87,8 @@ package main
 import "errors"   //will generate error on empty stack
 
 <once>
-	     type  generic_stack  bool       //In this example we don't need info inside the generic_stack
-   	                                     //the type can be any.   
+	     type  generic_stack  bool       //In this example we don't need info inside the 
+	                                     //generic_stack the type can be any.   
 </once>  
 
              type   stackNode<data> struct { //Will be expanded as stackNodePoint for Point
@@ -124,10 +126,10 @@ func (stk * Stack<data>) Pop () (* <data> , error ) {
 }
 
 
-	The best way to design a generic code is to write a specific implementation, test it well
-and create the template replacing the specific type with the <data> tag. 
+	The best way to design a generic code is to write a specific implementation, 
+test it well and create the template replacing the specific type with the <data> tag. 
 
-To precompile your code your project's files may looks as follow.
+    To precompile your code your project's files may looks as follow.
 
 
        main.go 
@@ -141,10 +143,10 @@ To precompile your code your project's files may looks as follow.
 
 You can place the templates in the current directory too.
 
-The resulting code will be writed to inkogen.go and is readable and gofmted golang file
+The resulting code will be writed to inkogen.go and is readable and gofmt-ed golang file
 
-      You don't have to run gogen if you don't change the templates or the structure of your data definition 
-that use generic.
+      You don't have to run gogen if you don't change the templates or the structure of 
+your data definition that use generic.
 
       The structs that defines generics can be as many as you need and can have any name. For example if you
 want to save your object using a generic template called saver , define your types as fallow:
@@ -168,7 +170,7 @@ want to save your object using a generic template called saver , define your typ
 
 	  type generic_others struct {
                Point      generic_saver     //Declare generic saver  for Point
-	       Circle     generic_dumper    //Declare generic dumper for Circle
+	           Circle     generic_dumper    //
           }
 
 
@@ -180,7 +182,7 @@ For declaring generics without using a helper struct,  the following pattern can
 
            type Shape  struct {
                 Label    string 
-		Xo       float32
+		        Xo       float32
                 Yo       float32
                 Points    []Point    		
                 Storage   generic_Storage     // Will declare a generic storage for Shape the 

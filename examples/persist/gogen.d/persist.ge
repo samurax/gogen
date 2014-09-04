@@ -1,0 +1,26 @@
+package main
+import    "encoding/gob"
+import    "os"
+<once>
+type generic_persist bool 
+</once>
+
+
+func (c *<data>)  Load ()  ( error ) {
+	  f , err := os.Open( c.file )
+          defer f.Close()
+	  if err == nil {   decoder :=  gob.NewDecoder(f)
+		            err = decoder.Decode(c) 
+			}
+          return   err
+}
+
+func (c *<data>)  Save () error {
+	  fo , err := os.OpenFile( c.file , os.O_WRONLY  | os.O_CREATE , 640 )
+	  if err != nil { return err  }
+          defer fo.Close()
+	  encoder :=  gob.NewEncoder(fo)
+	  err = encoder.Encode(*c)
+          return err
+}
+

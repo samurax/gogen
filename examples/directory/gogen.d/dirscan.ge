@@ -1,0 +1,47 @@
+package  main
+import  "log"
+import  "io/ioutil"
+import  "path/filepath"
+
+<once>
+type  generic_dirscan struct {
+Ext   string
+Base  string
+Dir   string
+Url   string
+IsDir bool
+}
+func GenAssert(err  error ) {  
+     if  err != nil {
+         log.Fatal(err) 
+     }
+}
+</once>
+
+func (gen * <data>) Scan ( url string , prefix string)  {
+
+	fls,err:=ioutil.ReadDir(url)
+        GenAssert( err)
+                                parsedir:= func (url string) {
+				gen.<data>.Ext  = filepath.Ext (url)
+				gen.<data>.Dir  = filepath.Dir (url)
+				gen.<data>.Base = filepath.Base(url)
+				gen.<data>.Url  = url
+ 	                        }
+        parsedir(url)
+	gen.<data>.IsDir = true
+	gen.DirInfo(prefix)
+	for  _ , f := range fls {
+		                nurl:=url+"/"+f.Name()
+                                parsedir(nurl) 
+				isdir:=f.IsDir()
+			        gen.<data>.IsDir = isdir
+                                gen.DirInfo(prefix)
+		                if  isdir { gen.Scan( nurl , prefix + "-----" )
+			                  }
+	                        }
+}
+
+
+
+

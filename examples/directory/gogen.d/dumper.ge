@@ -1,0 +1,18 @@
+package main
+import "fmt"
+import "strings"
+
+<once>
+type generic_dumper bool
+</once>
+
+func (d *<data>) Dump (title string) {
+str := fmt.Sprintf("%#v",*d)
+fmt.Println("__<data>_________"+title)
+str =  strings.Replace(str,":","=",-1)
+str =  strings.Replace(str,"{","\n....... ",-1)
+str =  strings.Replace(str,",","\n.......",-1)
+str =  strings.Replace(str,"}","\n",-1)
+fmt.Println(str)
+}
+

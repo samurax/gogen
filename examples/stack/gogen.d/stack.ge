@@ -1,0 +1,35 @@
+package main
+import "errors"
+
+<once>
+type   generic_stack   bool
+</once>
+
+type   stackNode<data>  struct {
+link  *stackNode<data>
+box    <data>  
+}
+
+type  Stack<data>  struct {
+link *stackNode<data>
+}
+//--------------------------------Generics
+func NewStack<data>  () *Stack<data> {
+  	  return new (Stack<data>)
+}
+
+func (stk * Stack<data>) Push ( p <data>)  {
+	  nn := new (stackNode<data>) 
+          nn.box = p
+	  nn.link = stk.link
+ 	  stk.link =  nn
+}
+
+func (stk * Stack<data>) Pop () (* <data> , error ) {
+          if  stk.link == nil {  return  nil , errors.New("No more") }
+          ret :=  &stk.link.box
+	  stk.link = stk.link.link
+	  return ret , nil
+}
+
+
